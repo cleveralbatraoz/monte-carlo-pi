@@ -28,11 +28,13 @@ double GetPi(std::function<double()> generator,
     if (number_of_iterations == 0) {
         return 0;
     }
-    unsigned cnt = 0;
-    for (unsigned iteration = 0; iteration < number_of_iterations; iteration++) {
+    std::size_t cnt = 0;
+    for (std::size_t iteration = 0; iteration < number_of_iterations; iteration++) {
         double x = generator();
         double y = generator();
-        cnt += 1 >= hypot(x, y);
+        if (pow(x, 2) + pow(y, 2) <= 1) {
+            cnt++;
+        }
     }
     return 4.0 * cnt / number_of_iterations;
 }
