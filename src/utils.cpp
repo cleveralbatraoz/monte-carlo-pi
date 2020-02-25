@@ -1,5 +1,4 @@
 #include "../include/utils.h"
-#include <iostream>
 #include <cmath>
 
 std::uniform_real_distribution<> get_real_distribution()
@@ -26,5 +25,14 @@ double generate_random_number()
 double GetPi(std::function<double()> generator,
              std::size_t number_of_iterations)
 {
-	return 0.;
+    if (number_of_iterations == 0) {
+        return 0;
+    }
+    unsigned cnt = 0;
+    for (unsigned iteration = 0; iteration < number_of_iterations; iteration++) {
+        double x = generator();
+        double y = generator();
+        cnt += 1 >= hypot(x, y);
+    }
+    return 4.0 * cnt / number_of_iterations;
 }
